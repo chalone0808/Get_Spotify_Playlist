@@ -10,9 +10,9 @@ class Spotify:
         self.url_content = None
 
     def open_url(self):
-        req = urllib.request.Request(self.url)
-        req.add_header('User-Agent', self.User_Agent)
-        response = urllib.request.urlopen(self.url)
+        headers = {'User-Agent':self.User_Agent}
+        req = urllib.request.Request(self.url, None, headers)
+        response = urllib.request.urlopen(req)
         return response.read()
 
     def get_track_names(self):
@@ -32,4 +32,5 @@ class Spotify:
 
 if __name__ == '__main__':
     s = Spotify()
+    print(s.open_url().decode('utf-8'))
     print(s.get_track_names())
